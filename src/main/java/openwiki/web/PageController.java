@@ -27,7 +27,12 @@ public class PageController {
     @GetMapping("/**")
     public String page(HttpServletRequest request, Model model) throws IOException {
 
-        Page page = pageService.getPage(1);
+
+        var uri = request.getRequestURI();
+        Page[] pages = pageService.getPagePath(uri);
+        var page = pages[pages.length-1];
+
+        model.addAttribute("pages", pages);
         model.addAttribute("name", page.getTitle());
         model.addAttribute("title", page.getTitle());
         model.addAttribute("content", page.getContent());

@@ -11,6 +11,7 @@ public class Page {
     private String title;
 
     private String content;
+    private Page parent;
 
     public int getId()  { return id; }
     public void setId(int id) { this.id = id; }
@@ -26,5 +27,18 @@ public class Page {
 
     public String getContent() { return this.content; }
     public void setContent(String content) { this.content = content; }
+
+    public Page getParent() { return this.parent;}
+    public void setParent(Page parent) { this.parent = parent; }
+
+    public String getAbsoluteUri() {
+
+        if(this.parent != null) {
+            var parentUri= this.parent.getAbsoluteUri();
+            
+            return  parentUri + (parentUri.endsWith("/") ? "": "/") + this.uri;
+        }
+        return "/";
+    }
 
 }
