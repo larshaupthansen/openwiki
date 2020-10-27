@@ -1,13 +1,13 @@
 export class Page {
     
-    Id: number;
+    id: number;
     
-    Title: string;
+    title: string;
 
-    Content: string;
+    content: string;
 
-    Uri: string;
+    uri: string;
     
-    ParentId: number;
+    parentId: number;
   }
   

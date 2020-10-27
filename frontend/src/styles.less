@@ -1,1 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+BODY {
+
+    width:100%;
+    height:100%;
+    display:block;
+}
+
+.shell-container {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    background:pink;
+    height:100%;
+}
+
+.topbar {
+
+    display: flex;
+    height: 50px;
+    background-color: darkblue;
+    color:white;
+
+}
+.shell {
+
+    height:100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: minmax(150px, 25%) 1fr;
+
+}
+
+.shell-navigation {
+    display: grid;
+    grid-template-rows: 1fr auto ; 
+    background-color:#ccc;
+
+}
+.navigation {
+    height:100%;
+}
+
+div.main {
+    width:70%;
+    height:100%;
+}

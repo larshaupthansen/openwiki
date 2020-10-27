@@ -5,8 +5,9 @@ import { HttpClient } from '@angular/common/http';
 import { Page } from '../model/page';
 import { Observable } from 'rxjs';
 
-@Injectable()
-
+@Injectable({
+    providedIn: 'root'  // <--provides this service in the root ModuleInjector
+  })
 export class PageService  {
 
   public constructor(public http: HttpClient) {
@@ -16,6 +17,10 @@ export class PageService  {
 
     return this.http.get<Page>(this.Server + '/api/page/'+id);
 
+  }
+
+  getPageByPath(path: string): Observable<Page> {
+    return this.http.get<Page>(this.Server   + '/api/path'+path);
   }
 
   public get Server(): string {
