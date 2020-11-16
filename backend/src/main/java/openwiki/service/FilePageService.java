@@ -29,6 +29,12 @@ public class FilePageService implements IPageService {
         return readPageFromFile(fileName);
     }
 
+    public Page[] getChildren(int id) throws IOException {
+
+        return searchForChildPages(id).toArray(new Page[0]);
+
+    }
+
     private Page readPageFromFile(String fileName) throws IOException {
         String json = new String(Files.readAllBytes(Paths.get(fileName)));
         return jsonToPage(json);
@@ -84,18 +90,19 @@ public class FilePageService implements IPageService {
         var pageList = searchFiles ( (Page p) -> p.getUri().equals(uri));
         if(!pageList.isEmpty()) {
             var page = pageList.get(0);
-            page.setParent(null);
             return page ;
         }
         return null;
     }
 
     private List<Page> searchForChildPages(Page parentPage) throws IOException {
+        return searchForChildPages(parentPage.getId());
+    }
+    private List<Page> searchForChildPages(int parentId) throws IOException {
 
-        var childPages = searchFiles( (Page p) -> p.getParentId() == parentPage.getId());
+        var childPages = searchFiles( (Page p) -> p.getParentId() == parentId);
 
         for (Page page : childPages) {
-            page.setParent(parentPage);
         }
         return childPages;
     }

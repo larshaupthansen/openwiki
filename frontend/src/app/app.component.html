@@ -11,7 +11,7 @@
 
     <div class="shell-navigation">
       <nav class="navigation">
-        Path: {{path}}
+        <tree-root #tree [nodes]="nodes" [options]="options" (activate)="onTreeActivate($event)"></tree-root>
       </nav>
       <div style="flex-grow:1;display:flex;">
         ADMINISTRATION
@@ -19,8 +19,8 @@
   </div>
 
     <div class="main">
-        <h1>{{title}}</h1>
-        <div [innerHtml]="content"></div>
+        <app-breadcrumb [pages]="pages"></app-breadcrumb>
+        <app-page [page]="page"></app-page> 
     </div>
   </div>
 </div>

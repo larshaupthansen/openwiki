@@ -19,12 +19,19 @@ export class PageService  {
 
   }
 
-  getPageByPath(path: string): Observable<Page> {
-    return this.http.get<Page>(this.Server   + '/api/path'+path);
+  public getChildren(id: number):Observable<Page[]> {
+
+    return this.http.get<Page[]>(this.Server + '/api/children/'+id);
+
+  }
+
+  getPageByPath(path: string): Observable<Page[]> {
+    return this.http.get<Page[]>(this.Server   + '/api/path'+path);
   }
 
   public get Server(): string {
     return environment.server;
   }
 
+  
 }

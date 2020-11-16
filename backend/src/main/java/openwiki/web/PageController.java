@@ -18,6 +18,7 @@ import openwiki.service.IPageService;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class PageController {
 
     private IPageService pageService;
@@ -27,21 +28,24 @@ public class PageController {
         this.pageService = pService;
     }
 
-    @GetMapping("/api/pages/{id}")
-    public Page page(@PathVariable int id) throws IOException {
+    @GetMapping("/api/page/{id}")
+    public Page getPage(@PathVariable int id) throws IOException {
 
         return  this.pageService.getPage(id);
     }
-    
+
+    @GetMapping("/api/children/{id}")
+    public Page[] getChildren(@PathVariable int id) throws IOException {
+
+        return  this.pageService.getChildren(id);
+    }
+
     @GetMapping("/api/path/**")
-    @CrossOrigin(origins = "http://localhost:4200")
-    public Page page(HttpServletRequest request) throws IOException {
+    public Page[] getPath(HttpServletRequest request) throws IOException {
 
         var uri = request.getRequestURI().substring(9);
 
-        Page[] pages = pageService.getPagePath(uri);
-        return pages[pages.length-1];
-
+        return  pageService.getPagePath(uri);
 
     }
 
